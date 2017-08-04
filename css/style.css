@@ -30,6 +30,28 @@ body {
     height: 200px;
 }
 
+.puz1 {
+    width: 230px;
+    height: 229px;
+}
+
+.puz2, .puz6, .puz9 {
+    width: 200px;
+    height: 230px;
+}
+
+.puz3, .puz4, .puz5, .puz7, .puz8  {
+    width: 230px;
+    height: 230px;
+}
+.puz10, .puz12 {
+    width: 230px;
+    height: 201px;
+}
+.puz11 {
+    width: 200px;
+    height: 201px;
+}
 .dropArea {
     position: relative;
     width: 600px;
