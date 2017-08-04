@@ -5,13 +5,10 @@
     var puzzle = document.querySelectorAll('.puz');
     var dropArea = document.querySelector('.dropArea');
     var status = document.querySelector('.status');
-    var counter  = 1;
+
     
     var dropAreaLeft = dropArea.getBoundingClientRect().left;
     var dropAreaTop = dropArea.getBoundingClientRect().top;
-    
-    console.log(Math.round(dropArea.getBoundingClientRect().left));
-    console.log(dropArea.getBoundingClientRect().top);
     
     
     [].forEach.call(puzzle, function(puzz, index){
@@ -23,7 +20,7 @@
             
             var shiftX = e.clientX - puzz.getBoundingClientRect().left;
             var shiftY = e.clientY - puzz.getBoundingClientRect().top;
-            var posArrayLeft = [100, 300, 500,100 ,300 , 500, 100, 300, 500, 100, 300, 500];
+            var posArrayLeft = [100, 300, 500, 100 ,300 , 500, 100, 300, 500, 100, 300, 500];
             var posArrayTop = [100, 100, 100, 300, 300, 300, 500, 500, 500, 700, 700, 700];            
             
             var oriArrayLeft = [0, 200, 400, 0, 200, 400, 0, 200, 400, 0, 200, 400,];
@@ -31,8 +28,11 @@
             
             function movePuzzle(target, pageX, pageY) {
 
-                target.style.left = pageX - shiftX + 'px';
-                target.style.top = pageY - shiftY + 'px';
+//                target.style.left = pageX - shiftX + 'px';
+//                target.style.top = pageY - shiftY + 'px';
+                
+                target.style.left = pageX - puzz.offsetWidth / 2+ 'px';
+                target.style.top = pageY - puzz.offsetWidth / 2 + 'px';
                 
             }
             
@@ -52,16 +52,14 @@
                 
                 movePuzzle(e.target, e.pageX, e.pageY);
                 
-//                console.log(e.pageX);
-                console.log(dropAreaLeft + posArrayLeft[index]);
-//                console.log(dropAreaLeft + posArrayLeft[index]);
-//                console.log(Math.abs(e.pageX - (dropAreaLeft + posArrayLeft[index])));
+                console.log(Math.round(e.pageX));
+
                 
-                if(Math.abs(e.pageX - (dropAreaLeft + posArrayLeft[index])) < 20 && (e.pageY - (dropAreaTop + posArrayTop[index])) < 20) {
+                if((Math.abs(e.pageX - (dropAreaLeft + posArrayLeft[index]))) < 25 && (Math.abs(e.pageY - (dropAreaTop + posArrayTop[index]))) < 25) {
                     
                     puzz.onmousemove = null;
                     puzz.onmouseup = null;
-//                    document.removeEventListener('mousemove', onmovePuzzle);
+
                     console.log('tak');
                     puzz.style.left = (dropAreaLeft + oriArrayLeft[index]) + 'px';
                     puzz.style.top = (dropAreaTop+ oriArrayTop[index]) + 'px';
