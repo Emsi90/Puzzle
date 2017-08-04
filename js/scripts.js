@@ -2,6 +2,9 @@
     
     var puzzle = document.querySelectorAll('.puz');
     var dropArea = document.querySelector('.dropArea');
+    var clickSound = document.querySelector('.click');
+    var kamehaSound = document.querySelector('.kameha');
+    var counter = 0;
     
     var dropAreaLeft = dropArea.getBoundingClientRect().left;
     var dropAreaTop = dropArea.getBoundingClientRect().top;
@@ -12,7 +15,7 @@
         puzz.style.top = Math.floor((Math.random() * 600) + 1) + 'px';
         
         puzz.onmousedown = function(e) {
-            
+            clickSound.load();
 //            var shiftX = e.clientX - puzz.getBoundingClientRect().left;
 //            var shiftY = e.clientY - puzz.getBoundingClientRect().top;
             
@@ -53,9 +56,14 @@
                     puzz.onmousemove = null;
                     puzz.onmouseup = null;
 
-                    console.log('tak');
+                    console.log('success');
                     puzz.style.left = (dropAreaLeft + oriArrayLeft[index]) + 'px';
                     puzz.style.top = (dropAreaTop+ oriArrayTop[index]) + 'px';
+                    
+                    clickSound.play();
+                    counter++;
+                    checkKame();
+                    console.log(counter);
                 }
                 
             };
@@ -65,9 +73,12 @@
 //            });
 
             puzz.onmouseup = function() {
+                
                 puzz.onmousemove = null;
                 document.removeEventListener('mousemove', onmovePuzzle);
                 puzz.onmouseup = null;
+                
+                
             };
 
             puzz.ondragstart = function() {
@@ -77,6 +88,11 @@
         };
 
     });
-
+    function checkKame() {
+        if (counter === 12) {
+            kamehaSound.play();
+        }
+    }               
+    
 })();
 
