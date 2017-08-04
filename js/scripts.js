@@ -1,15 +1,10 @@
 (function(){
-
-    if(!'draggable' in document.createElement('span')) return;
     
     var puzzle = document.querySelectorAll('.puz');
     var dropArea = document.querySelector('.dropArea');
-    var status = document.querySelector('.status');
-
     
     var dropAreaLeft = dropArea.getBoundingClientRect().left;
     var dropAreaTop = dropArea.getBoundingClientRect().top;
-    
     
     [].forEach.call(puzzle, function(puzz, index){
         
@@ -18,8 +13,9 @@
         
         puzz.onmousedown = function(e) {
             
-            var shiftX = e.clientX - puzz.getBoundingClientRect().left;
-            var shiftY = e.clientY - puzz.getBoundingClientRect().top;
+//            var shiftX = e.clientX - puzz.getBoundingClientRect().left;
+//            var shiftY = e.clientY - puzz.getBoundingClientRect().top;
+            
             var posArrayLeft = [100, 300, 500, 100 ,300 , 500, 100, 300, 500, 100, 300, 500];
             var posArrayTop = [100, 100, 100, 300, 300, 300, 500, 500, 500, 700, 700, 700];            
             
@@ -45,18 +41,15 @@
             puzz.style.position = 'absolute';
             puzz.style.zIndex = 1000;
             document.body.append(puzz);
-            
+
             movePuzzle(e.target, e.pageX, e.pageY);
         
             puzz.onmousemove = function(e) {
-                
-                movePuzzle(e.target, e.pageX, e.pageY);
-                
-                console.log(Math.round(e.pageX));
 
-                
+                movePuzzle(e.target, e.pageX, e.pageY);
+
                 if((Math.abs(e.pageX - (dropAreaLeft + posArrayLeft[index]))) < 25 && (Math.abs(e.pageY - (dropAreaTop + posArrayTop[index]))) < 25) {
-                    
+
                     puzz.onmousemove = null;
                     puzz.onmouseup = null;
 
@@ -64,7 +57,6 @@
                     puzz.style.left = (dropAreaLeft + oriArrayLeft[index]) + 'px';
                     puzz.style.top = (dropAreaTop+ oriArrayTop[index]) + 'px';
                 }
-                
                 
             };
 
@@ -84,73 +76,7 @@
             
         };
 
-        
-        
     });
-    
-    
-    
-    
-    
-    
-    
-//    function setStatus(msg) {
-//        status.innerHTML = msg;
-//    }
-//    
-//    mario.ondragstart = function(e) {
-//        setStatus('Rozpoczeto przeciąganie');
-//        
-//        e.dataTransfer.effectAllowed = 'copy';
-//        e.dataTransfer.setData('text/html', this.outerHTML);
-//        e.dataTransfer.setData('text/plain', 'Cześc jestem Mario!');
-//        e.dataTransfer.setData('text/custom', 'A Ty?');
-//    };
-//    
-//    
-//    mario.ondragend = function(e) {
-//        
-//        if(e.dataTransfer.dropEffect == 'copy') {
-//            mario.parentNode.removeChild(mario);
-//            
-//            setStatus('Przenoszenie zakończono sukcesem');
-//        }
-//    };
-//    
-//    mario.ondrag = function(e) {
-////        setStatus(counter++);
-//    };
-//    
-//    dropArea.ondragenter = function(e) {
-//        setStatus('Obiekt w obszarze zrzutu');
-//    };
-//    
-//    dropArea.ondragleave= function(e) {
-//        setStatus('Obiekt opuścił obszar zrzutu');
-//    };
-//    
-//    dropArea.ondragover = function(e) {
-//        
-////        setStatus(counter++);
-//        e.preventDefault();
-//        return false;
-//        
-//    };
-//    
-//    dropArea.ondrop = function(e) {
-//        e.preventDefault();
-//        
-//        if(e.dataTransfer.effectAllowed != 'copy') return;
-//        
-//        setStatus('Element upuszczono poprawnie');
-//        
-//        var data = e.dataTransfer.getData('text/html');
-//        dropArea.innerHTML += data;
-//        
-////        var data = e.dataTransfer.getData('text/plain') + ' ' + e.dataTransfer.getData('text/custom');
-////        
-////        setStatus(data);
-//    };
-    
+
 })();
 
